@@ -11,18 +11,18 @@
     "crypto"
   ],
   "main": "./bcrypt",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "author": "Nick Campbell (https://github.com/ncb000gt)",
   "engines": {
     "node": ">= 10.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kelektiv/node.bcrypt.js.git"
+    "url": "https://github.com/agathver/node.bcrypt.js.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kelektiv/node.bcrypt.js/issues"
+    "url": "https://github.com/agathver/node.bcrypt.js/issues"
   },
   "scripts": {
     "test": "npm install --build-from-source && nodeunit test",
@@ -58,7 +58,7 @@
     "module_name": "bcrypt_lib",
     "module_path": "./lib/binding/napi-v{napi_build_version}",
     "package_name": "{module_name}-v{version}-napi-v{napi_build_version}-{platform}-{arch}-{libc}.tar.gz",
-    "host": "https://github.com/kelektiv/node.bcrypt.js/releases/download/",
+    "host": "https://github.com/agathver/node.bcrypt.js/releases/download/",
     "remote_path": "v{version}",
     "napi_versions": [
       3
