@@ -55,7 +55,7 @@ deploy:
   api_key:
     secure: CAN+7gvR1wmZ12WHmf0ZK0XdAaWvlW9KuNOWMpGiy/R3pTZ6HejTXLldijEibKW/cedzud0KEBoO/JAdtSRi6IWVXLvLQn/ftY6DQ8zlXLNEHqNJ8y//Z+aGK7Q78swyQIOYFKTItS8/ZufEo9EFesPztvPN1UyczeyJp1eSBBtYlzweUiGEhStU+4+0Hm20N0yvUbwrOjSl5XYJiDPJ+T5bNFETD16wyVUQLCGzSiAQT22uKn0P/X7bWu6blVz/j/fOPx1Gw2czo2noZy9EUaSSNHjaIW5jGVVHJbKGPNNOroike4iLjLa/zrjcFbhXhOvp+0OJE9WSh7xv2kf1ObEvIPw8bUSEXue1A4QrWwRsgcvpUy+CNqJ0rq/cYJNMesujVBUpnWiN4jbzqr6qA9QRgAe5aoIuUK8Cl6LnpGPspW41U7lMzLMlFipVtdn/1yct/EKWASWqOrIF//SiNuDN8ZuYKdJe+6ABpGG4Bl1l0uLdDbaAduAtwT3+gHu3n/hmdqALrzbpWqNmzJVjh7UG51lCi8fHPHVFAXlLpwiOkebUqtL3NgY7XDuZUjbNy4Rdf4lJ49U7fkYCtxgfc1Sfowcwrxlj7uUybgigOHOXIpXzB1BhQVxmFBPfC1brWA3YGqqAXI9RnXDTM69Jy8yVblv6IVU3UJzXzaEMgPo=
   file_glob: true
-  file: build/stage/*/*
+  file: build/stage/kelektiv/node.bcrypt.js/releases/download/*/*.tar.gz
   on:
     node_js: '10'
     tags: true
