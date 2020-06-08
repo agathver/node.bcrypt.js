@@ -30,6 +30,7 @@ addons:
     - bc
 
 before_install:
+- shopt -s globstar
 - echo Building for Node $TRAVIS_NODE_VERSION
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX=$LINUX_CXX; $CXX --version;
   fi;
@@ -38,21 +39,25 @@ before_install:
 
 install: true
 
+before_script:
+- mkdir artifacts
+
 script:
 - npm test
 - "./node_modules/.bin/node-pre-gyp configure"
 - "./node_modules/.bin/node-pre-gyp build"
 - "./node_modules/.bin/node-pre-gyp package"
+- mv build/**/*.tar.gz artifacts
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]
   then
     docker run -w /src --entrypoint /bin/sh -v`pwd`:/src "node:${TRAVIS_NODE_VERSION}-alpine" test_alpine.sh
   fi
+- mv build/**/*.tar.gz artifacts
 
 before_deploy:
-- shopt -s globstar
 - echo "Will upload following files"
-- ls -1 build/**/*.tar.gz
+- ls -1 artifacts
 
 deploy:
   provider: releases
@@ -60,7 +65,7 @@ deploy:
   api_key:
     secure: CAN+7gvR1wmZ12WHmf0ZK0XdAaWvlW9KuNOWMpGiy/R3pTZ6HejTXLldijEibKW/cedzud0KEBoO/JAdtSRi6IWVXLvLQn/ftY6DQ8zlXLNEHqNJ8y//Z+aGK7Q78swyQIOYFKTItS8/ZufEo9EFesPztvPN1UyczeyJp1eSBBtYlzweUiGEhStU+4+0Hm20N0yvUbwrOjSl5XYJiDPJ+T5bNFETD16wyVUQLCGzSiAQT22uKn0P/X7bWu6blVz/j/fOPx1Gw2czo2noZy9EUaSSNHjaIW5jGVVHJbKGPNNOroike4iLjLa/zrjcFbhXhOvp+0OJE9WSh7xv2kf1ObEvIPw8bUSEXue1A4QrWwRsgcvpUy+CNqJ0rq/cYJNMesujVBUpnWiN4jbzqr6qA9QRgAe5aoIuUK8Cl6LnpGPspW41U7lMzLMlFipVtdn/1yct/EKWASWqOrIF//SiNuDN8ZuYKdJe+6ABpGG4Bl1l0uLdDbaAduAtwT3+gHu3n/hmdqALrzbpWqNmzJVjh7UG51lCi8fHPHVFAXlLpwiOkebUqtL3NgY7XDuZUjbNy4Rdf4lJ49U7fkYCtxgfc1Sfowcwrxlj7uUybgigOHOXIpXzB1BhQVxmFBPfC1brWA3YGqqAXI9RnXDTM69Jy8yVblv6IVU3UJzXzaEMgPo=
   file_glob: true
-  file: build/**/*.tar.gz
+  file: artifacts/*.tar.gz
   on:
     node_js: '10'
     tags: true
