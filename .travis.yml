@@ -53,7 +53,7 @@ script:
   then
     docker run -w /src --entrypoint /bin/sh -v`pwd`:/src "node:${TRAVIS_NODE_VERSION}-alpine" test_alpine.sh
   fi
-- mv build/**/*.tar.gz artifacts
+- sudo mv build/**/*.tar.gz artifacts
 
 before_deploy:
 - echo "Will upload following files"
