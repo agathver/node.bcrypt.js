@@ -57,3 +57,32 @@ jobs:
         with:
           name: bcrypt-lib-alpine-${{ matrix.nodeVersion }}
           path: build/stage/**/bcrypt_lib*.tar.gz
+
+  build-centos:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        nodeVersion: [14, 16]
+    container:
+      image: centos:7
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: |
+          yum install -y make gcc-c++ python3
+      - name: Use Node.js ${{ matrix.nodeVersion }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.nodeVersion }}
+      - name: Test
+        run: |
+          npm test --unsafe-perm
+      - name: Package
+        if: startsWith(github.ref, 'refs/tags/') || startsWith(github.ref, 'refs/heads/master')
+        run: npx node-pre-gyp package --unsafe-perm
+      - name: Upload
+        if: matrix.nodeVersion == '14' && (startsWith(github.ref, 'refs/tags/') || startsWith(github.ref, 'refs/heads/master'))
+        uses: actions/upload-artifact@v3
+        with:
+          name: bcrypt-lib-centos-${{ matrix.nodeVersion }}
+          path: build/stage/**/bcrypt_lib*.tar.gz
