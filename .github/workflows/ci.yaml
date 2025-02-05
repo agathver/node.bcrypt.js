@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-20.04, macos-11.0, windows-2019]
-        nodeVersion: [14, 16, 18, 20]
+        nodeVersion: [18, 20, 22, 24]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        nodeVersion: [14, 16, 18, 20]
+        nodeVersion: [18, 20, 22, 24]
     container:
       image: node:${{ matrix.nodeVersion }}-alpine
     steps:

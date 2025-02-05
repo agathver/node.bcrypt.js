@@ -1,3 +1,8 @@
+# 6.0.0 (unreleased)
+  * Update `node-pre-gyp` to 2.0.0
+  * Update `node-addon-api` to 8.0.0
+  * Drop support for NodeJS 10
+
 # 5.1.0 (2022-10-06)
   * Update `node-pre-gyp` to 1.0.11
 
